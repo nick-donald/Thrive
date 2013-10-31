@@ -1,8 +1,97 @@
 <?php
 // Template Name: Institutional Page
 
-get_header();
+get_header( 'institutional' );
 ?>
+<style type="text/css">
+  #inst-marquee-container {
+    width: 100%;
+    overflow: hidden;
+    border: solid thin;
+  }
+  #inst-marquee {
+    width: 100%;
+    height: 600px;
+
+    -webkit-transition: all 2s;
+    
+  }
+  .marquee-content {
+    width: 1150px;
+    height: 600px;
+    /*float: left;*/
+    display: inline-block;
+    vertical-align: top;
+    position: absolute;
+    border-right: solid;
+  }
+
+  .one {
+    background: url(http://frontpagemag.com/wp-content/uploads/2013/07/New-York-City-Skyline.jpg) fixed !important;
+    background-size: 100%;
+  }
+
+  .two {
+    background: url(http://imgs.abduzeedo.com/files/articles/20_beautiful_landscape_wallpapers/landscape-wallpaper-11a.jpg) fixed !important;
+    background-size: 100%;
+    
+  }
+
+  .three {
+    background: url(http://www.whitegadget.com/attachments/pc-wallpapers/140885d1372488501-lake-louise-lake-louise-wallpapers.jpg) fixed;
+    background-size: 100%;
+  }
+
+  .transition {
+    -webkit-transition: all 0.8s;
+  }
+
+  .no-transition {
+    -webkit-transition: none;
+  }
+
+  .active {
+    left: 0;
+  }
+
+  .last {
+    left: -1150px;
+  }
+  .next {
+    left: 1150px;
+  }
+  .waiting {
+    left: 2300px;
+  }
+  .marquee-content span {
+    font-family: 'Helvetica';
+    font-size: 3em;
+    margin-left: 100px;
+    margin-top: 200px;
+    display: block;
+  }
+</style>
+
+<div id="inst-marquee-container">
+  <div id="inst-marquee">
+    <div class="marquee-content three last pre"><span>
+      Third Slide
+    </span></div>
+    <div class="marquee-content one first active"><span>
+      First Slide
+    </span></div>
+    <div class="marquee-content two next"><span>
+      Second Slide
+    </span></div>
+    <div class="marquee-content three next post"><span>
+      Third Slide
+    </span></div>
+    <div class="marquee-content one next dup"><span>
+      First Slide
+    </span></div>
+    <!-- <div class="marquee-content four"></div> -->
+  </div>
+</div>
 
 <script>
 window.onload = svgG;
@@ -14,6 +103,8 @@ function svgG() {
 	});
 }
 </script>
+
+
 
 <!-- Creator: CorelDRAW -->
 <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="297mm" height="210mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
