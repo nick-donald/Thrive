@@ -4,8 +4,8 @@
 	// $header_variation = new phpab('header_variation');
 	// $header_variation->add_variation('header_variation');
 
-	$variation_class = ab_test('header-variation');
-	$variation_class == 'header-variation' ? $ga_value = "yes" : $ga_value = "no";
+	// $variation_class = ab_test('header-variation');
+	// $variation_class == 'header-variation' ? $ga_value = "yes" : $ga_value = "no";
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -69,7 +69,7 @@
 	  })();
 
 	</script>
-	<script type="text/javascript" src="http://localhost/wordpress/wp-content/themes/Thrive/JS/thrive_institutional.js"></script>
+	<script type="text/javascript" src="/wordpress/wp-content/themes/Thrive/JS/thrive_institutional.js"></script>
 </head>
 
 <body <?php body_class(); ?> data-ajax="false">
@@ -94,7 +94,7 @@
 				</div>
 				<div class="pull-right">
 					<nav id="desktop-menu">
-						<?php wp_nav_menu( array( 'menu_class' => 'nav-menu', 'exclude' => '40')) ?>
+						<?php // wp_nav_menu( array( 'menu_class' => 'nav-menu', 'exclude' => '40')) ?>
 					</nav>
 				</div>
 			</div>

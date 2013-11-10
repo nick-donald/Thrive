@@ -16,6 +16,7 @@ var ThriveMaster = {
 		thriveMasterSettings = this.settings();
 
 		this.uiBindings();
+		
 	},
 
 	uiBindings: function () {
@@ -179,6 +180,8 @@ var ThriveProducts = {
 		this.getProductWHash(function() {
 			return ThriveMaster.getHash();
 		}());
+
+		this.checkMobile();
 	},
 
 	uiBindings: function() {
@@ -199,6 +202,106 @@ var ThriveProducts = {
 			ThriveProducts.expandProductInfo(e, this);
 		});
 
+		Hammer(document.getElementById("products-info")).on("swipeleft", ThriveProducts.mobileGetProductRight);
+		Hammer(document.getElementById("products-info")).on("swiperight", ThriveProducts.mobileGetProductLeft);
+
+
+		// $("#products-info").hammer().on("swipeleft", function(e) {
+		// 	console.log(e);
+		// });
+
+	},
+
+	checkMobile: function() {
+		if (thriveMasterSettings.win.width() < 700) {
+			ThriveProducts.scrollSizer();
+
+			var mobileStr = 'Swipe to learn more</br><i class="icon-arrow-right"></i>';
+			$(".product-scroller-default p").html(mobileStr);
+
+			thriveMasterSettings.win.on("keydown", ThriveProducts.mobileProductsNav);
+
+
+		}
+	},
+
+	scrollSizer: function() {
+		var winWidth = thriveMasterSettings.win.width();
+		var styleStr = '#product-basic-scroller {width: ' + (winWidth * 5) + 'px;}'; 
+		var style = document.createElement('style');
+		style.type = 'text/css';
+
+		for (var i = 0; i < 4; i++) {
+			styleStr += '\n.scrollTo-' + i + ' {\n\t-webkit-transform: translateX(-' + (winWidth * (i + 1)) + 'px);\n\t-moz-transform: translateX(-' + (winWidth * (i + 1)) + 'px);\n\t-o-transform: translateX(-' + (winWidth * (i + 1)) + 'px);\n\ttransform: translateX(-' + (winWidth * (i + 1)) + 'px);\n}';
+		};
+
+		if (style.stylesheet) {
+			style.stylesheet.cssText = styleStr;
+		} else {
+			$(style).append(document.createTextNode(styleStr));
+		}
+
+		$('head').append(style);
+		$('.product-scroller-item').css({ width: winWidth });
+		
+	},
+
+	mobileProductsNav: function (e) {
+		e.preventDefault();
+
+		if (e.which === 39) {
+			ThriveProducts.mobileGetProductRight();
+		} 
+
+		if (e.which === 37) {
+			ThriveProducts.mobileGetProductLeft();	
+		}
+	},
+
+	mobileGetProductRight: function() {
+		var $selected = $('.selected');
+		var num = $selected.index();
+
+		if ($selected.hasClass("item-default")) {
+			$('.item-0').addClass("selected");
+			$selected.removeClass("selected");
+			thriveProductsSettings.productsInfo.removeClass().addClass('products-selector-0');
+
+			thriveProductsSettings.productBasicScroller.addClass("scrollTo-0");
+			thriveProductsSettings.productBasicMore.show();
+
+		} else if (num < 4) {
+			
+			var $next = thriveProductsSettings.productScrollerItem.eq(num + 1);
+
+			$next.addClass('selected');
+			$selected.removeClass('selected');
+
+			thriveProductsSettings.productBasicScroller.removeClass().addClass('scrollTo-' + num);
+			thriveProductsSettings.productsInfo.removeClass().addClass('products-selector-' + num);
+		}
+
+		$("#product-basic-more a").html('Nutritional Info <i class="icon-angle-down"></i>');
+	},
+
+	mobileGetProductLeft: function() {
+		var $selected = $('.selected');
+		var num = $selected.index();
+
+		if (!$selected.hasClass("item-default") && num !== 1) {
+			var $next = thriveProductsSettings.productScrollerItem.eq(num - 1);
+
+			$next.addClass('selected');
+			$selected.removeClass('selected');
+
+			console.log(num);
+
+			thriveProductsSettings.productBasicScroller.removeClass().addClass('scrollTo-' + (num - 2));
+			thriveProductsSettings.productsInfo.removeClass().addClass('products-selector-' + (num - 2));
+
+		}
+
+		$("#product-basic-more a").html('Nutritional Info <i class="icon-angle-down"></i>');
 	},
 
 	getProductInfo: function(cup) {

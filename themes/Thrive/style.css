@@ -55,6 +55,7 @@ ul {
 
 #page {
 	background-color: white;
+	overflow: auto;
 }
 
 .clearfix {
@@ -1760,6 +1761,7 @@ p.long-title, p.short-title {
 	#intro {
 		height: auto;
 		padding-bottom: 50px;
+		margin-top: 60px;
 	}
 
 	#desktop-menu {
@@ -1984,12 +1986,16 @@ p.long-title, p.short-title {
     }
 
     #products-info .scalable-container {
-    	width: 100%;
+    	width: 100% !important;
     }
 
     #product-basic-scroller {
     	height: auto;
     	width: 2030px;
+    	-webkit-transition: all 0.5s;
+    	-moz-transition: 	all 0.5s;
+    	-O-transition: 		all 0.5s;
+    	transition: 		all 0.5s;
     }    
 
     .product-scroller-item {
@@ -1997,13 +2003,16 @@ p.long-title, p.short-title {
     	display: inline-block;
     	vertical-align: top;
     	opacity: 1;
-    	margin-right: -5px;
+    	padding: 0;
+    	float: left;
     }
 
 
 
     .product-scroller-title {
     	float: none;
+    	width: auto;
+    	text-align: center;
     }
 
     .product-scroller-desc {
@@ -2170,3 +2179,7 @@ p.long-title, p.short-title {
 	background-size: 100%;
 }
 
+.original-link {
+	color: blue;
+	text-decoration: underline;
+}

@@ -28,7 +28,6 @@
 	<!--<![endif]-->
 	<link href='http://fonts.googleapis.com/css?family=Cabin|PT+Sans|Merriweather+Sans' rel='stylesheet' type='text/css'>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<link href="http://code.jquery.com/mobile/1.3.2/jquery.mobile.structure-1.3.2.min.css">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
 	<?php 
 

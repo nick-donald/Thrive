@@ -2,6 +2,24 @@
 	if (!is_admin()) { 
 		add_action("wp_enqueue_scripts", "my_jquery_enqueue", 0);
 		// add_action("wp_enqueue_scripts", "jquery_mobile", 2);
+		add_action('wp_enqueue_scripts', 'register_hammer_js', 1);
+	}
+
+	function enqueue_hammer_js() {
+		wp_register_script(
+			'hammerjs',
+			get_template_directory_uri() . '/JS/hammer.min.js'
+		);
+		wp_enqueue_scripts('hammerjs');
+	}
+	// add_action('wp_enqueue_scripts', 'enqueue_hammer_js');
+
+	function register_hammer_js() {  
+	    wp_register_script(  
+	      'hammerJs',  
+	       get_template_directory_uri() . '/JS/hammer.min.js'
+	    );  
+	    wp_enqueue_script('hammerJs');  
 	}
 	
 	function my_jquery_enqueue() {
