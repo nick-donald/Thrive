@@ -476,29 +476,6 @@ ul {
 	
 }
 
-.one {
-	background-color: #2a416e;
-}
-
-.two {
-	background-color: #00a5d5;
-}
-
-.three {
-	background-color: #c0392b;
-}
-
-.four {
-	background-color: #16a085;
-}
-
-.five {
-	border-top: solid 5px;
-	height: 30px;
-	line-height: 30px;
-	font-family: sans-serif;
-}
-
 #footer-container {
 	width: 100%;
 	height: 150px;
@@ -1954,4 +1931,46 @@ p.long-title, p.short-title {
     .product-scroller-default {
     	font-size: 2.2em;
     }
+}
+
+.one {
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+	src='/wp-content/themes/Thrive/Images/hospital.jpg',
+	sizingMethod='scale');
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(
+	src='/wp-content/themes/Thrive/Images/hospital.jpg',
+	sizingMethod='scale')";
+}
+
+.two {
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+	src='/wp-content/themes/Thrive/Images/school.jpg',
+	sizingMethod='scale');
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(
+	src='/wp-content/themes/Thrive/Images/school.jpg',
+	sizingMethod='scale')";
+}
+
+.three {
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+	src='/wp-content/themes/Thrive/Images/kids.jpg',
+	sizingMethod='scale');
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(
+	src='/wp-content/themes/Thrive/Images/kids.jpg',
+	sizingMethod='scale')";
+}
+
+.marquee-inner {
+	background: transparent;
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#90FFFFFF,endColorstr=#90FFFFFF); 
+    zoom: 1;
+}
+
+.marquee-controls, #scroll-carrot {
+	background: transparent;
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#90000000,endColorstr=#90000000); 
+    zoom: 1;
 }

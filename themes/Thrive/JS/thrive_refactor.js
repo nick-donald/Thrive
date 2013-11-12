@@ -58,7 +58,6 @@ var ThriveMaster = {
         if (s.konamiCounter === 10) {
             if (ThriveMaster.arrayEqual( s.konamiKeys, s.konamiCode )) {
                 ThriveMaster.iceCreamPopUp();
-                alert("konami");
 
                 konamiKeys = [];
                 konamiCounter = 0;
@@ -130,11 +129,7 @@ var ThriveHomePage = {
 	}, 
 
 	uiBindings: function() {
-		thriveHomePageSettings.cup.click(ThriveHomePage.alertTest);
-	},
-
-	alertTest: function() {
-		alert("fire");
+		
 	},
 
 	floatCup: function() {

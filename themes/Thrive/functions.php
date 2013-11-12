@@ -21,6 +21,15 @@
 	    );  
 	    wp_enqueue_script('hammerJs');  
 	}
+
+	function register_modernizr_js() {  
+	    wp_register_script(  
+	      'modernizrJs',  
+	       get_template_directory_uri() . '/JS/modernizr.js'
+	    );  
+	    wp_enqueue_script('modernizrJs');  
+	}
+	add_action('wp_enqueue_scripts', 'register_modernizr_js', 8);
 	
 	function my_jquery_enqueue() {
 	   wp_deregister_script('jquery');

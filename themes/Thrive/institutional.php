@@ -38,8 +38,6 @@ get_header( 'institutional' );
 
   #overlay {
     position: fixed;
-    /*background-color: rgba(255,255,255,0.8);*/
-    /*background: url(//localhost/wordpress/wp-content/themes/Thrive/images/noisy_grid.png) repeat;*/
     z-index: 1000;
     width: 100%;
     height: 100%;
@@ -72,14 +70,12 @@ get_header( 'institutional' );
     transition:         all 2s;
   }
 
-  #inst-marquee:after {
-    content: "";
+  #inst-marquee-overlay {
     position: absolute;
     width: 100%;
     height: 600px;
     z-index: 1;
     box-shadow: inset 0px 0px 10px 0px black;
-    pointer-events: none;
   }
 
   .marquee-content {
@@ -142,7 +138,7 @@ get_header( 'institutional' );
 
   .marquee-inner {
     width: 50%;
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.9);
     margin-top: 15%;
     margin-left: 10%;
     font-family: 'PT Sans';
@@ -222,6 +218,7 @@ get_header( 'institutional' );
     border-radius: 50%;
     color: white;
     top: 250px;
+    z-index: 1000;
   }
 
   #marquee-left {
@@ -272,7 +269,11 @@ get_header( 'institutional' );
   }
 
   #inst-opt-in a {  
-    /*background-color: #3498db;*/
+    background: #FFCF2E;
+    background: -webkit-linear-gradient(to bottom, #FFCF2E, #D9B027);
+    background: -moz-linear-gradient(to bottom, #FFCF2E, #D9B027);
+    background: -ms-linear-gradient(to bottom, #FFCF2E, #D9B027);
+    background: -o-linear-gradient(to bottom, #FFCF2E, #D9B027);
     background: linear-gradient(to bottom, #FFCF2E, #D9B027);
     color: white;
     padding: 10px;
@@ -280,6 +281,10 @@ get_header( 'institutional' );
   }
 
   #inst-opt-in a:hover {
+    background: -webkit-linear-gradient(to bottom, #D9B027, #B39120);
+    background: -moz-linear-gradient(to bottom, #D9B027, #B39120);
+    background: -ms-linear-gradient(to bottom, #D9B027, #B39120);
+    background: -o-linear-gradient(to bottom, #D9B027, #B39120);
     background: linear-gradient(to bottom, #D9B027, #B39120);
   }
 
@@ -295,7 +300,12 @@ get_header( 'institutional' );
 
 #form10 button {
   font-family: 'Merriweather Sans';
-  background-image: linear-gradient(to bottom, #FFF, #FFF8DC);
+  background: #FFF;
+  background: -webkit-linear-gradient(to bottom, #FFF, #FFF8DC);
+  background: -moz-linear-gradient(to bottom, #FFF, #FFF8DC);
+  background: -ms-linear-gradient(to bottom, #FFF, #FFF8DC);
+  background: -o-linear-gradient(to bottom, #FFF, #FFF8DC);
+  background: linear-gradient(to bottom, #FFF, #FFF8DC);
   outline: none;
   border: none;
   font-size: 1em;
@@ -440,7 +450,12 @@ get_header( 'institutional' );
     text-align: center;
     margin-top: 40px;
     padding: 20px;
-    background-image: linear-gradient(to bottom, #FFCFAF, #D9B027);
+    background: #D9B027;
+    background: -webkit-linear-gradient(to bottom, #FFCFAF, #D9B027);
+    background: -moz-linear-gradient(to bottom, #FFCFAF, #D9B027);
+    background: -ms-linear-gradient(to bottom, #FFCFAF, #D9B027);
+    background: -o-linear-gradient(to bottom, #FFCFAF, #D9B027);
+    background: linear-gradient(to bottom, #FFCFAF, #D9B027);
     border-radius: 15px;
     float: right;
     width: 240px;
@@ -456,6 +471,9 @@ get_header( 'institutional' );
     margin-left: -100px;
     opacity: 0;
     -webkit-transition: all 0.5s;
+    -moz-transition:    all 0.5s;
+    -o-transition:      all 0.5s;
+    transition:         all 0.5s;
   }
 
   .top-cup {
@@ -466,35 +484,41 @@ get_header( 'institutional' );
 </style>
 
 <div id="inst-marquee-container">
+  <div id="inst-marquee-overlay"></div>
   <div id="inst-marquee">
     <div class="marquee-content three last pre">
       <div class="marquee-inner">
         <p class="marquee-title">Thrive for Kids</p>
-        <p class="marquee-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate pretium dictum. Vivamus blandit eu metus nec laoreet. Quisque justo lacus, hendrerit a metus in, ullamcorper tempus tortor.</p>
+        <p class="marquee-desc">Nutrition deficiency is a growing problem in the US today. When children are picky eaters or have poor eating habits they may not get enough to eat which can lead to a failure to thrive.  A failure to thrive can lead to slow growth which can also lead to delays in mental and social skills.</p>
+        <p class="marquee-desc">Kids enjoy ice cream products because they’re fun to eat. Thrive Premium Ice cream is a source of delicious complete and balanced nutrition that even the pickiest eater will enjoy.</p>
       </div>
     </div>
     <div class="marquee-content one first active">
       <div class="marquee-inner">
-        <p class="marquee-title">Thrive for Health Care</p>
-        <p class="marquee-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate pretium dictum. Vivamus blandit eu metus nec laoreet. Quisque justo lacus, hendrerit a metus in, ullamcorper tempus tortor.</p>
+        <p class="marquee-title">Thrive for Healthcare</p>
+        <p class="marquee-desc">It has been proven that patients in healthcare facilities stop consuming the nutritional supplements they are served because they dislike the taste. Without consuming necessary nutrients, a patient’s ability to regain normal health levels is severely impacted.</p>
+        <p class="marquee-desc">Thrive delivers outstanding nutritional value to patients without compromising taste and enjoyment. Thrive Premium Ice Cream can be enjoyed throughout the day, like many nutritional supplements at breakfast, lunch, dinner and snacks.</p>
       </div>
     </div>
     <div class="marquee-content two next">
        <div class="marquee-inner">
         <p class="marquee-title">Thrive for Schools</p>
-        <p class="marquee-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate pretium dictum. Vivamus blandit eu metus nec laoreet. Quisque justo lacus, hendrerit a metus in, ullamcorper tempus tortor.</p>
+        <p class="marquee-desc">Many children consume at least half of their meals at school. Creating a culture of wellness through proper nutrition in schools plays a vital role in shaping the future. Nutrition has a significant impact on the performance of students in the classroom and beyond.</p>
+        <p class="marquee-desc">Today’s school food service directors need a nutritious and delicious solution that don’t compromise quality and one that’s easy to serve. Thrive Premium Ice Cream offers the perfect solution for school food service programs as a supplement, meal replacement, afternoon snack or dessert.</p>
       </div>
     </div>
     <div class="marquee-content three next post">
       <div class="marquee-inner">
         <p class="marquee-title">Thrive for Kids</p>
-        <p class="marquee-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate pretium dictum. Vivamus blandit eu metus nec laoreet. Quisque justo lacus, hendrerit a metus in, ullamcorper tempus tortor.</p>
+        <p class="marquee-desc">Nutrition deficiency is a growing problem in the US today. When children are picky eaters or have poor eating habits they may not get enough to eat which can lead to a failure to thrive.  A failure to thrive can lead to slow growth which can also lead to delays in mental and social skills.</p>
+        <p class="marquee-desc">Kids enjoy ice cream products because they’re fun to eat. Thrive Premium Ice cream is a source of delicious complete and balanced nutrition that even the pickiest eater will enjoy.</p>
       </div>
     </div>
     <div class="marquee-content one next dup">
       <div class="marquee-inner">
-        <p class="marquee-title">Thrive for Health Care</p>
-        <p class="marquee-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate pretium dictum. Vivamus blandit eu metus nec laoreet. Quisque justo lacus, hendrerit a metus in, ullamcorper tempus tortor.</p>
+        <p class="marquee-title">Thrive for Healthcare</p>
+        <p class="marquee-desc">It has been proven that patients in healthcare facilities stop consuming the nutritional supplements they are served because they dislike the taste. Without consuming necessary nutrients, a patient’s ability to regain normal health levels is severely impacted.</p>
+        <p class="marquee-desc">Thrive delivers outstanding nutritional value to patients without compromising taste and enjoyment. Thrive Premium Ice Cream can be enjoyed throughout the day, like many nutritional supplements at breakfast, lunch, dinner and snacks.</p>
       </div>
     </div>
   </div>
@@ -613,11 +637,11 @@ get_header( 'institutional' );
 </div>
 <div id="inst-map">
 <div id="inst-opt-in">
-    <a href="#"><i class="icon-envelope"></i>&nbsp;Click here to opt-in for more information on Thrive</a>
+    <a href="#"><i class="icon-envelope"></i>&nbsp;Click Here to Sign Up for Thrive's Latest Updates</a>
   </div>
 <div id="region-info-container">
   <div id="region-info">
-    <h3 class="region-info-title">Hover your mouse over your region</h2>
+    <h3 class="region-info-title">Click on your region</h3>
     <div class="region-info-desc">
     </div>
   </div>
@@ -683,7 +707,7 @@ get_header( 'institutional' );
     }
    
   </style>
-  <svg version="1.1" id="us-map" xmlns="&amp;ns_svg;" xmlns:xlink="&amp;ns_xlink;" viewBox="0 0 600 400">
+  <svg version="1.1" id="us-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" pointer-events="all" width="600" height="400">
     <g id="south" class="region">
       <g id="tx" class="state">
             <path d="M335.837,298.38 c0.008,0.071,0.668,5.862-0.71,7.392c-1.391,1.517-1.469,2.25-1.469,2.25c-0.142,0.828,0.139,1.791,0.139,1.791 c-4.799,0.033-6.762,3.503-10.505,2.722c-2.972-4.846-1.703,2.432-2.736,3.909c-2.897,4.146-12.534,9.639-12.806,9.639 s-0.256-0.329-1.044-0.694c-0.789-0.365-5.581,0.199-3.214,2.519c-5.352,2.712-6.124,3.862-9.982,8.943 c-2.583-1.003-1.593,3.1-2.779,6.859c-0.819,2.588-1.532,3.758-1.652,6.077c-0.12,2.318,3.541,9.756,2.519,14.5 c-2.225-0.722-3.896-3.019-6.513-2.908c-3.567,0.147-6.809-3.221-9.505-2.734c-5.836,1.051-7.167-7.728-9.946-11.201 c-0.866-1.089-0.829-4.255-0.738-5.256c0.347-3.811-3.953-3.18-4.643-6.64c-0.796-3.981-5.71-8.202-7.296-12.156 c-3.923-9.801-12.297-19.227-22.748-16.106c-3.692,1.1-8.097,6.455-9.336,10.158c-0.864,2.596-12.525-6.889-13.848-7.813 c-5.803-4.061-5.012-13.7-10.161-19.061c-4.911-5.111-9.809-12.05-14.935-16.238l-0.082-0.271c-0.177-0.589-0.515-1.267-0.438-1.896 l9.028,0.953l11.637,0.955l10.333,0.871l11.566,0.76l1.025-15.609l1.127-12.852l2.17-35.199l0.521,0.033l15.371,0.869l11.547,0.52 l6.704,0.105l-0.798,25.771l-0.087,1.563c2.205,0.325,5.498,5.336,7.38,1.822c1.263,0.813,1.488,1.788,1.868,3.17 c0.157,0.578,3.084,0.91,3.815,1.155c1.718,0.573,2.62,0.021,3.956,1.188c0.572,0.498,3.738-0.672,4.949-0.564 c-0.025,1.531,2.077,4.874,3.75,3.199c1.666-1.668,1.616-0.188,3.198,0.188c1.203,0.287,1.53,0.835,3.558,0.434 c-0.456,3.938,2.348-0.596,3.387-0.868c1.039-0.273,2.732,0.294,3.39,0.608c0.657,0.315,2.354,2.021,3.298,2.604 c2.91-2.894,7.821-3.295,11.723-2.778c1.197,0.159,0.689-1.308,2.935,0.098c1.228,0.768,2.431,1.529,3.623,2.291 c1.012,0.646,2.047,0.783,2.985,1.215c0.313,0.146,0.574,0.324,0.877,0.564c0.537,0.43,3.076-0.189,4.254,0.26l0.263,7.642 l0.433,14.327c2.613,1.748,2.987,5.06,4.168,7.469c1.231,2.513,1.885,3.803,1.996,6.25 C337.467,293.584,335.512,296.195,335.837,298.38z"></path>

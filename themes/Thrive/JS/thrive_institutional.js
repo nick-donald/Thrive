@@ -113,7 +113,7 @@ ThriveInstitutional.app = function() {
 			setMarqueeSize(false)
 		});
 
-		$(".region").on("mouseenter", showRegionRep);
+		$(".region").on("click", showRegionRep);
 
 		w.on("load", function() {
 			ThriveInstitutional.marqueeInterval = setInterval(scrollRight, 6000);
@@ -238,32 +238,36 @@ ThriveInstitutional.app = function() {
 
 	var scrollRight = function() {
 		var slides = $(".marquee-content");
-		var transitionStr = "-webkit-transition: all 0.8s;"
-		slides.addClass("transition");
-
-		// slides.attr("style", transitionStr);
-		clicked < 3 ? clicked ++ : clicked = 0;
-		var offset = clicked * -1150;
-		// var styleString = "-webkit-transform: translate3d(" + offset + "px, 0, 0);"
-		var styleString = "left:" + offset + "px;";
-		var styleString2 = "left:0;";
-		// $(".one").attr("style", styleString);
-		// $(".two").attr("style", styleString2);
 		var currActive = $(".active");
-		$(".active").next().addClass("active").removeClass("next");
-		currActive.addClass("last").removeClass("active");
-		// slides.attr("style", "");
 
-		$(".active").on("transitionend", function() {
-			checkIfLastR();
-			slides.removeClass("transition");
-		});
+		if (!Modernizr.csstransitions) {
+			currActive.next().addClass("next-active");
+			$(".active, .next-active").animate({ 
+				left: "-=" + w.width()
+			}, function() {
+				currActive.removeClass("active").addClass("last");
+				$(".next-active").removeClass("next-active next").addClass("active");
+				$(".marquee-content").css("left", "");
+				checkIfLastR();
+			});
+		} else {
+
+			slides.addClass("transition");
+			
+			$(".active").next().addClass("active").removeClass("next");
+			currActive.addClass("last").removeClass("active");
+
+			$(".active").on("webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd", function() {
+				checkIfLastR();
+				slides.removeClass("transition");
+			});
+		}
 	};
 
 	var checkIfLastR = function() {
 		if ($(".dup").hasClass("active")) {
 			$(".first").addClass("active").removeClass("last");
-			$(".first").siblings().addClass("next").removeClass("active").removeClass("last");
+			$(".first").siblings().addClass("next").removeClass("active last");
 			$(".pre").removeClass("next").addClass("last");
 		}
 	};
@@ -271,58 +275,34 @@ ThriveInstitutional.app = function() {
 	var scrollLeft = function() {
 		var currActive = $(".active");
 		var slides = $(".marquee-content");
-		// if ($(".first").hasClass("active")) {
-		// 	checkIfLastL();
-		// 	// $(".active").prev().addClass("active").removeClass("last");
-		// 	// $(".dup").removeClass("active");
-		// 	var currActive = $(".active");
-		// } 
-		slides.addClass("transition");
-		
-		$(".active").prev().addClass("active").removeClass("last");
-		currActive.addClass("next").removeClass("active");
 
-		$(".active").on("transitionend", function() {
-			checkIfLastL();
-			slides.removeClass("transition");
-		});
-
-
-		
-		
-		
-		// var transitionStr = "-webkit-transition: all 0.8s;"
-
-		// slides.attr("style", transitionStr);
-		// clicked < 1 ? clicked = 3 : clicked --;
-		// var offset = clicked * -1150;
-		// // var styleString = "-webkit-transform: translate3d(" + offset + "px, 0, 0);"
-		// var styleString = "left:" + offset + "px;";
-		// var styleString2 = "left:0;";
-		// // $(".one").attr("style", styleString);
-		// // $(".two").attr("style", styleString2);
-		// var currActive = $(".active");
-		// $(".active").prev().addClass("active").removeClass("last");
-
-		// currActive.addClass("next").removeClass("active");
-
-		// if ($(".active").hasClass("first")) {
+		if (!Modernizr.csstransitions) {
+			currActive.prev().addClass("next-active");
+			$(".active, .next-active").animate({ 
+				left: "+=" + w.width()
+			}).promise().done(function() {
+				currActive.removeClass("active").addClass("next");
+				$(".next-active").removeClass("next-active last").addClass("active");
+				$(".marquee-content").css("left", "");
+				checkIfLastL();
+			});
+		} else {
+			slides.addClass("transition");
 			
-		// 	$(".next").removeClass("next");
-		// 	$(".first").removeClass("active");
-		// 	$(".dup").addClass("active");
-		// 	$(".active").on("transitionend", function() {
-		// 		slides.attr("style", "");
-		// 		$(".first").siblings().addClass("next");
-		// 		$(".active").off("transitionend");
-		// 	});
-		// }
+			$(".active").prev().addClass("active").removeClass("last");
+			currActive.addClass("next").removeClass("active");
+
+			$(".active").on("transitionend", function() {
+				checkIfLastL();
+				slides.removeClass("transition");
+			});
+		}
 	};
 
 	var checkIfLastL = function() {
 		if ($(".pre").hasClass("active")) {
 			$(".dup").siblings().addClass("last").removeClass("active").removeClass("next");
-			$(".post").addClass("active").removeClass("next").removeClass("last");
+			$(".post").addClass("active").removeClass("next last");
 		}
 	};
 
