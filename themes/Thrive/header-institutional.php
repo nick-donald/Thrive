@@ -1,12 +1,3 @@
-<?php 
-	// require_once('wp-content/phpab.php');
-	
-	// $header_variation = new phpab('header_variation');
-	// $header_variation->add_variation('header_variation');
-
-	// $variation_class = ab_test('header-variation');
-	// $variation_class == 'header-variation' ? $ga_value = "yes" : $ga_value = "no";
-?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
@@ -53,13 +44,6 @@
 
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-44799249-1']);
-	  _gaq.push(['_setCustomVar', 1, 'Thrive AB Variaion', <?php echo "'" .$ga_value. "'"; ?>, 1]);
-	  _gaq.push(['_setCustomVar',
-	      2,                   // This custom var is set to slot #1.  Required parameter.
-	      'Items Removed',     // The name acts as a kind of category for the user activity.  Required parameter.
-	      'Yes',               // This value of the custom variable.  Required parameter.
-	      2                    // Sets the scope to session-level.  Optional parameter.
-	   ]);
 	  _gaq.push(['_trackPageview']);
 
 	  (function() {
@@ -69,14 +53,13 @@
 	  })();
 
 	</script>
-	<script type="text/javascript" src="/wordpress/wp-content/themes/Thrive/JS/thrive_institutional.js"></script>
 </head>
 
 <body <?php body_class(); ?> data-ajax="false">
 	<div id="mobile-menu">
 		<?php wp_nav_menu( array( 'menu_class' => 'mobile-nav', 'exclude' => '40')) ?>
 	</div>
-	<div id="page" class=<?php echo $variation_class; ?>>
+	<div id="page">
 		<header class="header-container">
 			<div id="header">
 			<div class="pull-left">
@@ -94,7 +77,7 @@
 				</div>
 				<div class="pull-right">
 					<nav id="desktop-menu">
-						<?php // wp_nav_menu( array( 'menu_class' => 'nav-menu', 'exclude' => '40')) ?>
+						<?php wp_nav_menu( array( 'menu_class' => 'nav-menu', 'exclude' => '40')) ?>
 					</nav>
 				</div>
 			</div>

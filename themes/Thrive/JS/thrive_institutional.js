@@ -18,27 +18,27 @@ ThriveInstitutional.app = function() {
 	var regionalRepInfo = {
 		southeast: {
 			Representative: "Chris Dreska",
-			Phone: "111-111-111",
+			Phone: "404-932-8257",
 			Email: "cdreska@thriveicecream.com"
 		},
 		south: {
 			Representative: "Jeff Holtz",
-			Phone: "222-111-111",
+			Phone: "501-281-0177",
 			Email: "jholtz@thriveicecream.com"
 		},
 		northeast: {
 			Representative: "Frank Everett",
-			Phone: "333-111-111",
+			Phone: "401-662-1542",
 			Email: "feverett@thriveicecream.com"
 		},
 		florida: {
 			Representative: "Nathan Everett",
-			Phone: "444-111-111",
+			Phone: "203-581-1478",
 			Email: "neverett@thriveicecream.com"
 		},
 		midwest: {
 			Representative: "Raine Holly",
-			Phone: "555-111-111",
+			Phone: "479-381-7500",
 			Email: "rholly@thriveicecream.com"
 		}
 	};
@@ -116,7 +116,7 @@ ThriveInstitutional.app = function() {
 		$(".region").on("click", showRegionRep);
 
 		w.on("load", function() {
-			ThriveInstitutional.marqueeInterval = setInterval(scrollRight, 6000);
+			ThriveInstitutional.marqueeInterval = setInterval(scrollRight, 14000);
 			setTimeout(cupShow, 3000);
 		});
 
@@ -130,20 +130,20 @@ ThriveInstitutional.app = function() {
 			scrollRight();
 		});
 
-		$("#form10").on("submit", function(e) {
+		$("#inst-form").on("submit", function(e) {
 			e.preventDefault();
 
-			var emailInput = $("#2_element10");
+			var emailInput = $("#2_element13");
 			if ( verifyEmail(emailInput.val()) ) {
-				var formData = new FormData(document.getElementById("form10"));
+				var formData = new FormData(document.getElementById("inst-form"));
 				$.ajax({
-					url: "/coupons",
+					url: "/about/institutional",
 					data: formData,
 					processData: false,
 					contentType: false,
 					type: "POST",
 					beforeSend: function() {
-						$("#form10").remove();
+						$("#inst-form").remove();
 						$("#inst-form-title").remove();
 						$("#form-sending").show();
 					},
@@ -156,6 +156,7 @@ ThriveInstitutional.app = function() {
 						},6000);
 					}
 				});
+				console.log(formData);
 			} else {
 				emailInput.focus();
 				emailInput.val("");
@@ -163,7 +164,7 @@ ThriveInstitutional.app = function() {
 			}
 		});
 
-		$("#2_element10").on("blur", function(e) {
+		$("#2_element13").on("blur", function(e) {
 			checkEmail(e, $(this));
 		});
 
@@ -214,7 +215,7 @@ ThriveInstitutional.app = function() {
 			$(".warning i").css({display: "inline"});
 		} else {
 			$(".warning i").css({display: "none"});
-			$("#4_element_submit10").removeAttr("disabled");
+			$("#4_element_submit13").removeAttr("disabled");
 		}
 	};
 

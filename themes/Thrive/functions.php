@@ -74,7 +74,7 @@
 	       get_template_directory_uri() . '/JS/thrive_refactor.js',  
 	       array('jquery')  
 	    );  
-	    wp_enqueue_script('thrive_refactor');  
+	    wp_enqueue_script('thrive_refactor');   
 	}  
 	add_action('wp_enqueue_scripts', 'register_thrive_refactor', 11);
 
