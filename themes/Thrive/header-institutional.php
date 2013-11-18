@@ -53,6 +53,7 @@
 	  })();
 
 	</script>
+	<script type="text/javascript" src="/wp-content/themes/Thrive/JS/thrive_institutional.js"></script>
 </head>
 
 <body <?php body_class(); ?> data-ajax="false">

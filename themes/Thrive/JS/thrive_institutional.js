@@ -80,7 +80,8 @@ ThriveInstitutional.app = function() {
 	var showRegionRep = function() {
 		var $this, id, $regionInfo = $(".region-info-desc");
 		$this = $(this);
-		id = $this.attr("id");
+
+		$('html').hasClass('svg') ? id = $this.attr("id") : id = $this.val();
 
 		$(".region-info-title").text(id.capitalize() + " Region");
 		$regionInfo.html("");
@@ -177,6 +178,10 @@ ThriveInstitutional.app = function() {
 		$(".table-link").click(function(e) {
 			e.preventDefault();
 		});
+
+		if (!$('html').hasClass('svg')) {
+			$('#svg-alt-select').change(showRegionRep);
+		};
 	};
 
 	var cupShow = function() {

@@ -2283,6 +2283,7 @@ margin-top: -5px;
 opacity: 0;
 z-index: -1;
 -webkit-transition: all 0.3s;
+display: none;
 }
 
 .table-link:after {
@@ -2298,11 +2299,13 @@ margin-top: -5px;
 opacity: 0;
 z-index: -1;
 -webkit-transition: all 0.3s;
+display: none;
 }
 
 tr:hover .table-link:before, tr:hover .table-link:after  {
 z-index: 1;
 opacity: 1 !important;
+display: inline;
 }
 
 tr:hover .table-link:before {
@@ -2336,10 +2339,10 @@ position: relative;
 
 .inst-cup {
 width: 240px;
-display: inline-block;
+display: none;
 position: absolute;
 left: 50%;
-margin-left: -100px;
+margin-left: -120px;
 opacity: 0;
 -webkit-transition: all 0.5s;
 -moz-transition:    all 0.5s;
@@ -2349,7 +2352,7 @@ transition:         all 0.5s;
 
 .top-cup {
 opacity: 1;
-margin-left: -120px;
+display: block;
 }
 
 .original-link {
@@ -2450,4 +2453,23 @@ path {
 	background: transparent;
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#90000000,endColorstr=#90000000); 
     zoom: 1;
+}
+
+.no-svg .svg-alternative {
+	display: block;
+	text-align: center;
+	position: relative;
+	margin-top: 50px;
+}
+
+#svg-alt-select {
+	font-size: 1em;
+}
+
+#png-map-regions {
+	position: relative;
+}
+
+.png-map-region {
+	position: absolute;
 }

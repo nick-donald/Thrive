@@ -2662,3 +2662,25 @@ path {
   -moz-transition:    all 0.5s;
   transition:         all 0.5s;
 }
+
+.svg-alternative {
+	display: none;
+}
+
+.no-svg .svg-alternative {
+	display: block;
+	text-align: center;
+	position: relative;
+}
+
+#svg-alt-select {
+	font-size: 1em;
+}
+
+#png-map-regions {
+	position: relative;
+}
+
+.png-map-region {
+	position: absolute;
+}

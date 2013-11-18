@@ -78,6 +78,16 @@
 	}  
 	add_action('wp_enqueue_scripts', 'register_thrive_refactor', 11);
 
+	function register_thrive_inst() {  
+	    wp_register_script(  
+	      'thrive_institutional',  
+	       get_template_directory_uri() . '/JS/thrive_institutional.js',  
+	       array('jquery')  
+	    );  
+	    wp_enqueue_script('register_thrive_inst');   
+	}
+	add_action('wp_enqueue_script', 'register_thrive_inst', 12);
+
 	function jquery_mobile() {
 		wp_register_script(
 			'jquery-mobile',

@@ -428,6 +428,21 @@ get_header( 'institutional' );
       </g>
     </g>
   </svg>
+  <div class="svg-alternative">
+    <select id="svg-alt-select">
+      <option value="southeast" selected="selected">Select your Region</option>
+      <option value="southeast">Southeast</option>
+      <option value="south">South</option>
+      <option value="florida">Florida</option>
+      <option value="northeast">Northeast</option>
+      <option value="midwest">Midwest</option>
+    </select> <br>
+    <img src="/wp-content/themes/Thrive/Images/thrive-usa.png">
+    <div class="png-map-region png-southeast"></div>
+    <div class="png-map-region png-south"></div>
+    <div class="png-map-region png-midwest"></div>
+    <div class="png-map-region png-northeast"></div>
+  </div>
 
 </div>
 
