@@ -536,6 +536,7 @@ class SLPlus_UI {
         add_action('slp_render_search_form' ,array($this,'create_DefaultSearchForm'));
         add_action('slp_render_map'         ,array($this,'create_DefaultMap'));
 
+        // Thrive additions: all below divs except #sl_div were added
         return
             '<div id="sl_div">' .
                 $this->create_Search() .
