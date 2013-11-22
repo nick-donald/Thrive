@@ -2295,7 +2295,7 @@ border-right: solid;
 }
 
 .one {
-background: url(/wordpress/wp-content/themes/Thrive/Images/hospital.jpg) no-repeat center center fixed;
+background: url(/wp-content/themes/Thrive/Images/hospital.jpg) no-repeat center center fixed;
 -webkit-background-size: 100%;
 -moz-background-size:    100%;
 -o-background-size:      100%;
@@ -2303,7 +2303,7 @@ background-size:         100%;
 }
 
 .two {
-background: url(/wordpress/wp-content/themes/Thrive/Images/school.jpg)  no-repeat center center fixed;
+background: url(/wp-content/themes/Thrive/Images/school.jpg)  no-repeat center center fixed;
 -webkit-background-size: 100%;
 -moz-background-size: 100%;
 background-size: 100%;
@@ -2311,7 +2311,7 @@ background-size: 100%;
 }
 
 .three {
-background: url(/wordpress/wp-content/themes/Thrive/Images/kids.jpg)  no-repeat center center fixed;
+background: url(/wp-content/themes/Thrive/Images/kids.jpg)  no-repeat center center fixed;
 -webkit-background-size: 100%;
 -moz-background-size: 100%;
 background-size: 100%;
@@ -2323,10 +2323,10 @@ background-size: 100%;
 transition:         all 0.8s;
 }
 
-.no-transition {
--webkit-transition: none;
--moz-transition:    none;
-transition:         none;
+.mobile-transition {
+	-webkit-transition: all 0.2s;
+	-moz-transition:    all 0.2s;
+	transition:         all 0.2s;
 }
 
 .active {
@@ -2777,6 +2777,5 @@ path {
 	font-size: 0.8em;
 	background-color: orange;
 	text-align: center;
-	border-bottom: solid thin;
 	color: white;
 }

@@ -108,7 +108,7 @@ ThriveInstitutional.app = function() {
 	var setEventListeners = function() {
 
 		$("#scroll-carrot").click(function() {
-			scrollToEl("#inst-map-title");
+			scrollToEl("#inst-about-container");
 		});
 
 		w.resize(function() {
@@ -183,18 +183,10 @@ ThriveInstitutional.app = function() {
 		if (!$('html').hasClass('svg')) {
 			$('#svg-alt-select').change(showRegionRep);
 		};
-
-		// Hammer(document.getElementById('inst-marquee-overlay')).on('swipeleft', function() {
-		// 	clearInterval(ThriveInstitutional.marqueeInterval);
-		// 	scrollRight();
-		// });
-
-		// Hammer(document.getElementById('inst-marquee-overlay')).on('swiperight', function() {
-		// 	clearInterval(ThriveInstitutional.marqueeInterval);
-		// 	scrollLeft();
-		// });
-	
-		mobileEvents();
+		
+		if (w.width() < 600) {
+			mobileEvents();
+		}
 	};
 
 	var mobileEvents = function() {
@@ -204,45 +196,77 @@ ThriveInstitutional.app = function() {
 		Hammer(document.getElementById('inst-marquee-overlay')).on('dragstart', function(e) {
 			console.log('drag start');
 			$active = $('.active');
-			$active.css("z-index", 1000);
+			// $active.css("z-index", 1000);
 			if (e.gesture.direction === 'left') {
 				$next = $('.next').eq(0);
+			} else {
+				$next = $('.last').last();
 			}
-			console.log(e);
-		});
-
-		Hammer(document.getElementById('inst-marquee-overlay')).on('drag', function(e) {
-			// console.log(e);
-			$active.css("-webkit-transform", "translateX(" + e.gesture.deltaX + "px)");
-			$next.css("-webkit-transform", "translateX(" + ( width + e.gesture.deltaX ) + "px)");
-		});
-
-		Hammer(document.getElementById('inst-marquee-overlay')).on('dragend', function(e) {
-			// $active.addClass('transition');
-			// $next.addClass('transition');
-
-
-			console.log(e);
-			continueMotion(e.gesture.velocityX, e.gesture.deltaX);
-
-			// if (Math.abs(e.gesture.deltaX) > width / 2) {
-			// 	$active.css("-webkit-transform", "translateX(" + (-width) + "px)");
-			// 	$next.css("-webkit-transform", "translateX(0)");
-
-			// 	$active.on('transitionend', function() {
-			// 		$active.addClass('last').removeClass('transition active');
-			// 		$next.addClass('active').removeClass('transition next');
-			// 	});
-			// } else {
-			// 	$active.css("-webkit-transform", "translateX(0)");
-			// 	$next.css("-webkit-transform", "translateX(" + width + "px)");
-			// }
 			
 		});
 
+		Hammer(document.getElementById('inst-marquee-overlay')).on('drag', function(e) {
+			$active.css("-webkit-transform", "translateX(" + e.gesture.deltaX + "px)");
+			if (e.gesture.direction === 'left') {
+				$next.css("-webkit-transform", "translateX(" + ( width + e.gesture.deltaX ) + "px)");
+			} else if (e.gesture.direction === 'right') {
+				$next.css("-webkit-transform", "translateX(" + ( -width + e.gesture.deltaX ) + "px)");
+			}
+		});
+
+		Hammer(document.getElementById('inst-marquee-overlay')).on('dragend', function(e) {
+			$active.addClass('mobile-transition');
+			$next.addClass('mobile-transition');
+			var absDeltaX = Math.abs(e.gesture.deltaX), dir = e.gesture.direction;
+			console.log(e);
+
+			if ((absDeltaX > width / 4) && (dir === 'left')) { // Swiped more than halway to the left
+				$active.css("-webkit-transform", "translateX(" + (-width) + "px)");
+				$next.css("-webkit-transform", "translateX(0)");
+			} else if ((absDeltaX < width / 4) && (dir === 'left')) { // Swiped less than halfway to the left
+				$active.css("-webkit-transform", "translateX(0)");
+				$next.css("-webkit-transform", "translateX(" + width + "px)");
+			} else if ((absDeltaX > width / 4) && (dir === 'right')) { // Swiped more than halway to the right
+				$active.css("-webkit-transform", "translateX(" + (width) + "px)");
+				$next.css("-webkit-transform", "translateX(0)");
+			} else if ((absDeltaX < width / 4) && (dir === 'right')) { // Swiped less than halway to the right
+				$active.css("-webkit-transform", "translateX(0)");
+				$next.css("-webkit-transform", "translateX(" + -width + "px)");
+			}
+
+			// $active.on('transitionend', function() {
+			// 	$active.removeClass('mobile-transition');
+			// 	$next.removeClass('mobile-transition');
+			// 	$('.marquee-content').css("-webkit-transform", "");
+			// });
+
+			$('body').on('webkitTransitionEnd', '.active' ,function(e) {
+				return (function(direction) {
+					if ((absDeltaX > width / 4) && (direction === 'left')) {
+						$active.addClass('last').removeClass('active next');
+						$next.addClass('active').removeClass('next');
+						checkIfLastR();
+						
+					} else if ((absDeltaX > width / 4) && (direction === 'right')) {
+						$active.addClass('next').removeClass('last').removeClass('active');
+						$next.addClass('active').removeClass('last');
+						checkIfLastL();
+					}
+					$active.removeClass('mobile-transition');
+					$next.removeClass('mobile-transition');
+					$('.marquee-content').css("-webkit-transform", "");
+					$('body').off('webkitTransitionEnd');
+				}(dir));
+			});
+
+
+		});
+
+		var endSwipe = function() {
+			alert('swipe ove');
+		};
+
 		var continueMotion = function(velocity, delta) {
-			console.log('first offset: ' + $active.position().left);
-			console.log('speed: ' + velocity);
 			var firstLeft = $active.position().left;
 
 			$active.animate({
@@ -256,6 +280,8 @@ ThriveInstitutional.app = function() {
 					firstLeft -= velocity;
 					$active.css("-webkit-transform", "translateX(" + firstLeft + "px)");
 					console.log(firstLeft);
+				},
+				complete: function() {
 				}
 			}
 			);
@@ -358,8 +384,10 @@ ThriveInstitutional.app = function() {
 	var checkIfLastR = function() {
 		if ($(".dup").hasClass("active")) {
 			$(".first").addClass("active").removeClass("last");
-			$(".first").siblings().addClass("next").removeClass("active last");
+			$(".first").siblings().addClass("next").removeClass("active").removeClass("last");
 			$(".pre").removeClass("next").addClass("last");
+			// $(".dup").removeClass("active");
+			// return true;
 		}
 	};
 
