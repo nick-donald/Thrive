@@ -1460,6 +1460,8 @@ p.long-title, p.short-title {
 	border-radius: 5px;
 	background-color: white;
 	color: black;
+	padding: 5px;
+	cursor: pointer;
 }
 
 .faq:last-child {
@@ -1471,10 +1473,7 @@ p.long-title, p.short-title {
 	right: 10px;
 	top: 10px;
 	cursor: pointer;
-
-	-webkit-transition: all 0.2s;
-	-moz-transition: 	all 0.2s;
-	transition: 		all 0.2s;
+	display: none;
 }
 
 .faq-expand-open {
@@ -2218,6 +2217,11 @@ z-index: 1;
 overflow: auto;
 }
 
+.inst-about-content, .inst-about-title {
+	overflow: auto;
+	position: relative;
+}
+
 #inst-about-container p {
 font-size: 1em;
 font-family: 'PT Sans', sans-serif;
@@ -2472,4 +2476,17 @@ path {
 
 .png-map-region {
 	position: absolute;
+}
+
+#mobile-swipe-reminder {
+	display: none;
+	position: relative;
+	padding: 5px;
+	width: 100%;
+	margin: 0 auto;
+	font-family: 'Merriweather Sans';
+	font-size: 0.8em;
+	background-color: orange;
+	text-align: center;
+	color: white;
 }

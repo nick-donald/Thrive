@@ -43,7 +43,7 @@ get_header( 'institutional' );
 <div id="inst-marquee-container">
   <div id="inst-marquee-overlay"></div>
   <div id="mobile-swipe-reminder">
-    <span>Swipe for more info</span>
+    <span><i class="icon-arrow-left"></i>&nbsp;Swipe photos for more info&nbsp;<i class="icon-arrow-right"></i></span>
   </div>
   <div id="inst-marquee">
     <div class="marquee-content three last pre">

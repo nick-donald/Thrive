@@ -60,9 +60,9 @@ ThriveInstitutional.app = function() {
 	};
 
 	var setMarqueeSize = function(condition) {
-		var wWidth = w.width();
-		var styleString = ".last { left: " + -wWidth + "px; }\n.next{ left: " + wWidth + "px; }\n";
-		var styleString = ".last { -webkit-transform: translateX(" + -wWidth + "px); }\n.next{ -webkit-transform: translateX(" + wWidth + "px); }\n";
+		var styleString = '', wWidth = w.width();
+		wWidth > 600 ? styleString = ".last { left: " + -wWidth + "px; }\n.next{ left: " + wWidth + "px; }\n" : 
+			styleString = ".last { -webkit-transform: translateX(" + -wWidth + "px); }\n.next{ -webkit-transform: translateX(" + wWidth + "px); }\n";
 		var style = document.createElement('style');
 		style.type = "text/css";
 
@@ -98,27 +98,26 @@ ThriveInstitutional.app = function() {
 		}
 	};
 
-	ThriveInstitutional.zoomOut = function(e) {
-		if (e.which === 27) {
-			$('.region').css({opacity: 1});
-			$("#region-info-container").fadeOut("slow");
-		}
-	};
-
 	var setEventListeners = function() {
 
 		$("#scroll-carrot").click(function() {
 			scrollToEl("#inst-about-container");
 		});
 
+		var resizeTimeout;
 		w.resize(function() {
-			setMarqueeSize(false)
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(function() {
+				setMarqueeSize(false)
+				if (w.width() < 600) {
+					mobileEvents();
+				}
+			}, 200);
 		});
 
 		$(".region").on("click", showRegionRep);
 
 		w.on("load", function() {
-			// ThriveInstitutional.marqueeInterval = setInterval(scrollRight, 14000);
 			setTimeout(cupShow, 3000);
 		});
 
@@ -189,12 +188,24 @@ ThriveInstitutional.app = function() {
 		}
 	};
 
+	var mobileEventsReset = function() {
+		Hammer(document.getElementById('inst-marquee-overlay')).off('dragstart drag dragend');
+		mobileEvents();
+	}
+
+	var hammerEvents = {
+		dragstartEl: Hammer(document.getElementById('inst-marquee-overlay')),
+		dragstartOn: function(callback) {
+			this.dragstartEl.on('dragstart', callback);
+		},
+		dragStartOff: function(callback) {
+			this.dragstartEl.on('dragstart', null);
+		}
+	};
+
 	var mobileEvents = function() {
-
 		var $active, $next, $prev, width = $(window).width();
-
-		Hammer(document.getElementById('inst-marquee-overlay')).on('dragstart', function(e) {
-			console.log('drag start');
+		var dragStart = function(e) {
 			$active = $('.active');
 			// $active.css("z-index", 1000);
 			if (e.gesture.direction === 'left') {
@@ -202,23 +213,21 @@ ThriveInstitutional.app = function() {
 			} else {
 				$next = $('.last').last();
 			}
-			
-		});
+		};
 
-		Hammer(document.getElementById('inst-marquee-overlay')).on('drag', function(e) {
+		var drag = function(e) {
 			$active.css("-webkit-transform", "translateX(" + e.gesture.deltaX + "px)");
 			if (e.gesture.direction === 'left') {
 				$next.css("-webkit-transform", "translateX(" + ( width + e.gesture.deltaX ) + "px)");
 			} else if (e.gesture.direction === 'right') {
 				$next.css("-webkit-transform", "translateX(" + ( -width + e.gesture.deltaX ) + "px)");
 			}
-		});
+		};
 
-		Hammer(document.getElementById('inst-marquee-overlay')).on('dragend', function(e) {
+		var dragEnd = function(e) {
 			$active.addClass('mobile-transition');
 			$next.addClass('mobile-transition');
 			var absDeltaX = Math.abs(e.gesture.deltaX), dir = e.gesture.direction;
-			console.log(e);
 
 			if ((absDeltaX > width / 4) && (dir === 'left')) { // Swiped more than halway to the left
 				$active.css("-webkit-transform", "translateX(" + (-width) + "px)");
@@ -234,60 +243,37 @@ ThriveInstitutional.app = function() {
 				$next.css("-webkit-transform", "translateX(" + -width + "px)");
 			}
 
-			// $active.on('transitionend', function() {
-			// 	$active.removeClass('mobile-transition');
-			// 	$next.removeClass('mobile-transition');
-			// 	$('.marquee-content').css("-webkit-transform", "");
-			// });
-
-			$('body').on('webkitTransitionEnd', '.active' ,function(e) {
-				return (function(direction) {
-					if ((absDeltaX > width / 4) && (direction === 'left')) {
-						$active.addClass('last').removeClass('active next');
-						$next.addClass('active').removeClass('next');
-						checkIfLastR();
-						
-					} else if ((absDeltaX > width / 4) && (direction === 'right')) {
-						$active.addClass('next').removeClass('last').removeClass('active');
-						$next.addClass('active').removeClass('last');
-						checkIfLastL();
-					}
-					$active.removeClass('mobile-transition');
-					$next.removeClass('mobile-transition');
-					$('.marquee-content').css("-webkit-transform", "");
-					$('body').off('webkitTransitionEnd');
-				}(dir));
-			});
-
-
-		});
-
-		var endSwipe = function() {
-			alert('swipe ove');
-		};
-
-		var continueMotion = function(velocity, delta) {
-			var firstLeft = $active.position().left;
-
-			$active.animate({
-				'z-index': 0
-			}, {
-				duration: 1000,
-				step: function(currentStep) {
-					var pos = $active.offset().left;
-
-					velocity *= (currentStep / 850);
-					firstLeft -= velocity;
-					$active.css("-webkit-transform", "translateX(" + firstLeft + "px)");
-					console.log(firstLeft);
-				},
-				complete: function() {
+			setTimeout(function() {
+				if ((absDeltaX > width / 4) && (dir === 'left')) {
+					$active.addClass('last').removeClass('active next');
+					$next.addClass('active').removeClass('next');
+					checkIfLastR();
+					
+				} else if ((absDeltaX > width / 4) && (dir === 'right')) {
+					$active.addClass('next').removeClass('last').removeClass('active');
+					$next.addClass('active').removeClass('last');
+					checkIfLastL();
 				}
-			}
-			);
-		};
+				// $active.removeClass('mobile-transition');
+				// $next.removeClass('mobile-transition');
+				$('.marquee-content').removeClass('mobile-transition');
+				$('.marquee-content').css("-webkit-transform", "");
+				$('body').off('webkitTransitionEnd');
+				Hammer(document.getElementById('inst-marquee-overlay')).off('dragstart', dragStart);
+				Hammer(document.getElementById('inst-marquee-overlay')).off('drag', drag);
+				Hammer(document.getElementById('inst-marquee-overlay')).off('dragend', dragEnd);
+				mobileEvents();
+			}, 250);
+		}
+
+		hammerEvents.dragstartOn(dragStart);
+
+		Hammer(document.getElementById('inst-marquee-overlay')).on('drag', drag);
+
+		Hammer(document.getElementById('inst-marquee-overlay')).on('dragend', dragEnd);
 
 		$(window).on('load', function() {
+			$('#mobile-swipe-reminder').show();
 			$('#inst-marquee').addClass('reminder-active');
 			setTimeout(function() {
 				$('#inst-marquee').removeClass('reminder-active');
