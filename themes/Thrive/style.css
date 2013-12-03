@@ -2088,15 +2088,15 @@ p.long-title, p.short-title {
     }
 
     .one {
-    	background: url(/wp-content/themes/Thrive/Images/hospital_small.jpg) no-repeat center center fixed !important;
+    	background: url(/wp-content/themes/Thrive/Images/hospital_small.jpg) no-repeat center center scroll !important;
     }
 
     .two {
-    	background: url(/wp-content/themes/Thrive/Images/school_small.jpg)  no-repeat center center fixed !important;
+    	background: url(/wp-content/themes/Thrive/Images/school_small.jpg)  no-repeat center center scroll !important;
     }
 
     .three {
-    	background: url(/wp-content/themes/Thrive/Images/kids_small.jpg)  no-repeat center center fixed !important;
+    	background: url(/wp-content/themes/Thrive/Images/kids_small.jpg)  no-repeat center center scroll !important;
     }
 
     #scroll-carrot {
@@ -2132,6 +2132,8 @@ p.long-title, p.short-title {
     	border-right: none !important;
     	background-size: cover !important;
     	background-attachment: scroll !important;
+    	-webkit-backface-visibility: hidden;
+    	-webkit-perspective: 1000;
     }
 
     .marquee-controls {

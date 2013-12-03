@@ -1,5 +1,5 @@
 <?php 
-	$link = mysql_connect('localhost', 'nickdonald', 'mavericks13');
+	$link = mysql_connect('localhost', 'nickdonald', '');
 
 	$db = mysql_select_db('bitnami_wordpress', $link);
 
@@ -61,5 +61,10 @@
 	// Additional headers
 	$headers .= 'From: Thrive Ice Cream <no-reply@thriveicecream.com>';
 
-	mail('nickjdonald@gmail.com', 'Thrive DB Test', $message, $headers);
+	try {
+		mail('nickjdonald@gmail.com', 'Thrive DB Test', $message, $headers);
+		echo "success";
+	} catch (Exception $e) {
+		echo 'Caught Exception: ', $e->getMessage(), "\n";
+	}
 ?>
